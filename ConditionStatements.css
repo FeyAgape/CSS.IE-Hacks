@@ -1,0 +1,104 @@
+/*Edge*/
+@supports (-ms-ime-align:auto) {
+
+section. {
+    padding-top: 2%;
+}
+}
+
+/*firefox*/
+@-moz-document url-prefix() { 
+  .section.{
+      padding: 20px;
+   }
+}
+
+/*Ipads*/
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  
+section.{
+    padding-top: 2%;
+}
+} 
+
+/*IE*/
+ <!--[if (lt IE 10)]>
+         <link href="/name.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+
+<!--[if (gte IE 10)&(lte IE 10)]>
+        <script type="text/stylesheet" src="/js/vendor/selectivizr-min.js"></script>
+    <![endif]-->
+
+
+<!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+<!--[if &(lte IE 10)]>
+        <script type="text/javascript" src="/js/vendor/selectivizr-min.js"></script>
+    <![endif]-->
+
+/* Microsoft Edge Browser 12+ (All) - @supports method */
+
+@supports (-ms-ime-align:auto) {
+  .selector { property:value; } 
+}
+
+/* Microsoft Edge Browser 15+ - @supports method */
+
+@supports (-ms-ime-align:auto)
+and (-webkit-text-stroke:initial) {
+  .selector { property:value; } 
+}
+
+/* Microsoft Edge Browser 14+ - @supports method */
+
+@supports (-ms-ime-align:auto)
+and (not (-ms-accelerator:true)) {
+  .selector { property:value; } 
+}
+/* Microsoft Edge Browser 14 - @supports method */
+
+@supports (-ms-ime-align:auto)
+and (not (-ms-accelerator:true))
+and (not (-webkit-text-stroke:initial)) {
+  .selector { property:value; } 
+}
+
+/* Microsoft Edge Browser 14- - @supports method */
+
+@supports (-ms-ime-align:auto)
+and (not (-webkit-text-stroke:initial)) {
+  .selector { property:value; } 
+}
+
+/*And for those who like one-liners as well:
+ Microsoft Edge Browser 12+ (All) - one-liner method */
+
+_:-ms-lang(x), _:-webkit-full-screen, .selector { property:value; }
+Additional numbered versions follow:
+
+/* Microsoft Edge Browser 13+ - one-liner method */
+
+_:-ms-lang(x), _::-webkit-meter-bar, .selector { property:value; }
+/* Microsoft Edge Browser 13+ - @supports method */
+
+@supports (-ms-ime-align:auto) and (color:unset) {
+  .selector { property:value; } 
+}
+/* Microsoft Edge Browser 13 - @supports method */
+
+@supports (-ms-accelerator:true) and (color:unset) {
+  .selector { property:value; } 
+}
+/* Microsoft Edge Browser 13- (12-13) - @supports method */
+
+@supports (-ms-accelerator:true) {
+  .selector { property:value; } 
+}
+/* Microsoft Edge Browser 12 */
+
+@supports (-ms-accelerator:true) and (not (color:unset)) {
+  .selector { property:value; } 
+}
