@@ -1,0 +1,7 @@
+Flexbox fix for IE9
+
+If a containing div is set to display: flex then change that to display: table 
+If the containing div has flex items inside it then these should be changed to display: table-cell
+If the contents in the table-cell are not aligned up correctly e.g. there is an image on the left and then content on the right starts below the image, then set the table-cell content to have vertical-align:middle or vertical-align:top
+
+
