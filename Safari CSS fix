@@ -1,0 +1,982 @@
+https://jeffclayton.wordpress.com/2014/07/22/the-chrome-and-safari-css-hacks-collection/ 
+
+* If you are using iOS Chrome (say in version 7 or 8 or 9) and the hacks seem to be off, BEFORE you complain that these do not work, there is nothing wrong with the hacks -- it is not like other versions of Chrome. iOS Chrome uses the Safari hacks INSTEAD of the ones for Chrome. It may LOOK like Chrome, but is NOT using the Chrome engine, but the Safari engine from Apple instead.
+More about that here: http://allthingsd.com/20120628/googles-chrome-for-ios-is-more-like-a-chrome-plated-apple
+Chrome and Safari (and now Opera which follows Chrome since version 14) CSS formatting “hacks” I have been creating and torture testing are here. Most of these, especially the underscore hacks I have been turning out, are my work, and some of my best ones are at BrowserHacks.com now.
+
+This one I did not create but should be included here, covering Chrome and Safari (any version), and Opera 14+ since it made the change to webkit and trails Chrome.
+
+/* A one-liner to target Webkit browsers */
+
+.selector:not(*:root) { property:value; }
+Which could be rewritten and used like so to separate out the selector:
+
+/* A one-liner to target Webkit browsers */
+
+body:not(*:root) .selector { property:value; }
+
+Author: Jeff Clayton
+The underscore method is leaner and so my favorite rewrite:
+
+/* A one-liner to target Webkit browsers */
+
+_:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+And a famous Media Query to do the same thing…
+
+/* A Media Query to target Webkit browsers */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+   .selector { property:value; } 
+}
+And one more of mine…
+
+/* My own one-liner to target Webkit browsers */
+
+_:-webkit-any-link, :root .selector { property:value; }
+
+Author: Jeff Clayton
+Safari 9.0 released, here are a few I created for that…
+
+For about a month I have been working on Safari 9 (beta) – Safari 9 on iOS (and the beta which is due to be released soon for desktops) and here is the resulting set of CSS hacks for you.
+
+/* Safari 9+ */
+
+@supports (overflow:-webkit-marquee)
+   and (justify-content:inherit) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+A One-Liner:
+
+/* Safari 9+ */
+
+_::-webkit-:not(:root:root), .selector { property:value; } 
+
+Author: Jeff Clayton
+And a One-Liner that is not for iOS:
+
+/* Safari 9+ (non-iOS) */
+
+_:-webkit-full-screen:not(:root:root), .selector { property:value; } 
+
+Author: Jeff Clayton
+One that targets Safari 9 but ONLY on iOS:
+
+/* Safari 9+ (iOS Only) */
+
+@supports (-webkit-text-size-adjust:none)
+   and (not (-ms-accelerator:true)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+And more…
+
+/* Safari 10.1+ */
+
+@media not all and (min-resolution:.001dpcm)
+{ @media {
+    .selector { property:value; } 
+}}
+
+Author: Jeff Clayton
+/* Safari 6.1-10.0 */
+
+@media screen and (min-color-index:0)
+   and(-webkit-min-device-pixel-ratio:0) { @media {
+    .selector { property:value; }
+}}
+
+Author: Jeff Clayton
+/* Safari 6.2,7.1+ */
+
+_::-webkit-full-page-media, _:future, :root .selector { property:value; }
+
+Author: Jeff Clayton
+This Safari 6.1-7 one took time for me to create, and like the Chrome 29+ one, it was well worth time time and effort to invent:
+
+/* Safari 6.1-7.0 */
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+  and (min-color-index:0) {
+    .selector {(; property:value; );}
+}
+
+Author: Jeff Clayton
+There is an @supports hack for Chrome (for 28 and newer) I have seen out on the web.
+You can use this if you aren’t concerned about versions 22-27:
+
+/* Chrome 28+ (and Opera 14+) */
+
+@supports (-webkit-appearance:none) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+If you are concerned about older versions of Chrome you can target a few of them.
+The Chrome hack I have put together covers version 22-28:
+
+/* Chrome 22-28 (and Opera 14-15) */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    .selector {-chrome-:only(;
+        property:value;
+    );}
+}
+
+Author: Jeff Clayton
+Safari released case-insensitive html attributes and Chrome 49+ is including it as well. Here is a modified combo that works on only Chrome 49 (Canary version) and newer. I could do this in Safari as well but it would be a bit clunky and redundant since I already found cleaner ones for Safari (above).
+
+Note that there must be a matching (different case) version of the html attribute. I created a custom one (CSS allows you to do that) called ‘browser’ since it seemed appropriate. There must be both a selector and an identifying attribute for this to work:
+
+/* Chrome 49+ (and Opera 36+) case-insensitive one-liner */
+
+*[browser="C49UP" i] _:not(*:root):unresolved, .selector { property:value; }
+
+/* And the matching Div... */
+
+<div class="selector" browser="c49up">Stuff Here</div>
+
+Author: Jeff Clayton
+Regular numbered versions follow:
+
+/* Chrome 48+ (and Opera 35+) */
+
+@supports (-webkit-appearance:none)
+   and (font-feature-settings:normal)
+     and (not (-ms-accelerator:true)) {
+       .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 47+ (and Opera 34+) */
+
+@supports (-webkit-appearance:none)
+    and (text-align-last:auto) and (not (-ms-accelerator:true)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 47+ (and Opera 34+) one-liner */
+
+_:placeholder-shown, _:-internal-list-box, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 47 (and Opera 34) */
+
+@supports (-webkit-appearance:none)
+   and (text-align-last:auto)
+     and (not (font-feature-settings:normal))
+       and (not (-ms-accelerator:true)) {
+         .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 46+ (and Opera 33+) */
+
+@supports (-webkit-appearance:none)
+   and (motion-path:path('M0,0')) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 46 (and Opera 33) */
+
+@supports (-webkit-appearance:none)
+   and (motion-path:path('M0,0'))
+     and (not (text-align-last:auto)) {
+       .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 45+ (and Opera 32+) */
+
+@supports (-webkit-tap-highlight-color:currentcolor)
+   and (not (-ms-accelerator:true)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 45 (and Opera 32) */
+
+@supports (-webkit-tap-highlight-color:currentcolor)
+   and (not (motion-path:path('M0,0')))
+     and (not (-ms-accelerator:true)) {
+       .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 44+ (and Opera 31+) */
+
+@supports (-webkit-appearance:none)
+   and (word-break:keep-all) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 44 (and Opera 31) */
+
+@supports (-webkit-appearance:none)
+   and (word-break:keep-all)
+     and (not (-webkit-tap-highlight-color:currentcolor)) {
+       .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 43+ (and Opera 30+) */
+
+@supports (-webkit-appearance:none) and (R:0) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 43 (and Opera 30) */
+
+@supports (-webkit-appearance:none) and (R:0)
+   and (not (word-break:keep-all)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 42+ (and Opera 29+) */
+
+@supports (-webkit-appearance:none) and (x:0) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 42 (and Opera 29) */
+
+@supports (-webkit-appearance:none) and (x:0)
+  and (not (R:0)) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 41+ (and Opera 28+) */
+
+@supports (-webkit-appearance:none) and (color:unset) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 41 (and Opera 28) */
+
+@supports (-webkit-appearance:none) and (color:unset)
+  and (not (x:0)) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 40+ (and Opera 27+) */
+
+@supports (-webkit-appearance:none) and (not (color:unset))
+  and (not (-webkit-aspect-ratio:none)) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 40 (and Opera 27) */
+
+@supports (-webkit-appearance:none)
+  and (not (-webkit-aspect-ratio:none)) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 39+ (and Opera 26+) */
+
+@supports (-webkit-appearance:none) and (shape-outside:none)
+   and (not (will-change:auto)) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 39 (and Opera 26) */
+
+@supports (-webkit-aspect-ratio:none) and (shape-outside:none)
+   and (not (will-change:auto)) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 28-39 (and Opera 14+) */
+
+@supports (-webkit-appearance:none) {
+    _::cue-region, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 38+ (and Opera 25+) */
+
+@supports (-webkit-appearance:none) and (font-stretch:normal) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 38 (and Opera 25) */
+
+@supports (-webkit-appearance:none) and (font-stretch:normal) {
+   and (will-change:auto) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 37+ (and Opera 24+) */
+
+@supports (-webkit-appearance:none) and (shape-outside:none) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 37 (and Opera 24) */
+
+@supports (-webkit-appearance:none) and (shape-outside:none) 
+  and (not (font-stretch:normal)) { 
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 36+ (and Opera 23+) */
+
+@supports (-webkit-appearance:none) and (touch-action:auto) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 36 (and Opera 23) */
+
+@supports (-webkit-appearance:none) and (touch-action:auto) 
+  and (not (shape-outside:none)) { 
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 35-39 (and Opera 22-26) */
+
+_:not(*:root), _:host, _::cue-region, .selector { property:value; } 
+
+Author: Jeff Clayton
+/* Chrome 32-39 (and Opera 19-26) */
+
+@supports (-webkit-appearance:none)
+  and (object-fit:none) {
+    _::cue-region, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+There are often more than one hack that have the same results. Why post more than one? Often in the future, hacks that previously affected the same browser set diverge due to changes in the newer browsers. There are also different methods that have different uses. @supports and @media css rules can often be nested within each other, but one-liners have their place — often within the @supports or @media rules.
+
+I try to find as many ways to do these as possible in case of such changes, or sometimes one ends up easier to read or use. Check my post [here] at the browserhacks github forum for an example of divergence. Here are a few that do the same thing at this time. Some are shorter and that is always nice too:
+
+/* Chrome 35+ (and Opera 22+) */
+
+_:host, _:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 35+ (and Opera 22+) */
+
+_::content, _:future, .selector:not(*:root) { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 35+ (and Opera 22+) */
+
+_:-webkit-any-link, _:host, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 35+ (and Opera 22+) */
+
+@supports (-webkit-appearance:none)
+  and (background-blend-mode:difference,normal) {
+    .selector { property:value; } 
+}
+
+Authors: Guillaume Simons & Jeff Clayton
+/* Chrome 35 */
+
+@supports (-webkit-appearance:none)
+  and (background-blend-mode:difference,normal) 
+    and (not (touch-action:auto)) {
+        .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 34+ (and Opera 21+) */
+
+_::-webkit-seamless-document, _:unresolved, :root { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 34+ (and Opera 21+) */
+
+@supports (-webkit-appearance:none)
+  and (font-variant-ligatures:normal) {
+    .selector { property:value; } 
+}
+
+Authors: Guillaume Simons & Jeff Clayton
+/* Chrome 34 (and Opera 21) */
+
+@supports (-webkit-appearance:none)
+   and (font-variant-ligatures:normal) 
+     and (not (background-blend-mode:difference,normal)) {
+        .selector { property:value; } 
+}
+
+Authors: Guillaume Simons & Jeff Clayton
+/* Chrome 33+ (and Opera 20+) */
+
+@supports (-webkit-appearance:none)
+  and (font-kerning:auto) {
+    .selector { property:value; } 
+}
+
+Authors: Guillaume Simons & Jeff Clayton
+/* Chrome 33 (and Opera 20) */
+
+@supports (-webkit-appearance:none)
+  and (font-kerning:auto) 
+    and (not (font-variant-ligatures:normal)) {
+        .selector { property:value; } 
+}
+
+Authors: Guillaume Simons & Jeff Clayton
+/* Chrome 32+ (and Opera 19+) */
+
+_:not(*:root), _:unresolved, .selector { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 32+ (and Opera 19+) */
+
+@supports (-webkit-appearance:none)
+  and (object-fit:none) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 32 (and Opera 19) */
+
+@supports (-webkit-appearance:none)
+  and (object-fit:none) 
+    and (not (font-kerning:auto)) {
+        .selector { property:value; } 
+}
+
+Authors: Guillaume Simons & Jeff Clayton
+/* Chrome 31+ (and Opera 18+) */
+
+@supports (-webkit-appearance:none) 
+    and (not (-webkit-marquee-repetition:infinite)) {
+        .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 31 (and Opera 18) */
+
+@supports (-webkit-appearance:none) and (not (object-fit:none))
+    and (not (-webkit-marquee-repetition:infinite)) {
+        .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 28-31 (and Opera 14-18) */
+
+@supports (-webkit-font-smoothing:antialiased) 
+    and (not (object-fit:none)) {
+        .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 30+ (and Opera 17+) */
+
+_::backdrop, _:future, _:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 30+ (and Opera 17+) */
+
+@supports (-webkit-appearance:none) and (justify-content:inherit)
+   and (not (-webkit-hyphens:auto)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 30 (and Opera 17) */
+
+@supports (-webkit-marquee-repetition:infinite)
+   and (not (-webkit-hyphens:auto)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 28-30 (and Opera 14-17) */
+
+@supports (-webkit-marquee-repetition:infinite) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 29+ (and Opera 16+) */
+
+@supports (-webkit-appearance:none)
+  and (justify-content:inherit) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 29+ (and Opera 16+) */
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+  and (min-resolution:.001dpcm) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 29 (and Opera 16) */
+
+@supports (-webkit-hyphens:auto) and (justify-content:inherit) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+This one I found in programs, but not originally planned as a hack. It is very good so I sent it to BrowserHacks.com for inclusion.
+
+/* Chrome 28+ (and Opera 14+) */
+
+@supports (-webkit-appearance:none) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+One I wrote before -webkit-appearance:none appeared…
+
+/* Chrome 28+ (and Opera 14+) */
+
+@supports (-webkit-font-smoothing:antialiased) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 28 (and Opera 14-15) */
+
+@supports (overflow:-webkit-marquee) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 22-28 (and Opera 14-15) */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    .selector {-chrome-:only(;
+        property:value;
+    );}
+}
+
+Author: Jeff Clayton
+/* Safari 6.1+, Chrome 27+ (and Opera 14+) */
+
+_:scope, _:future, .selector:not(*:root) { property:value; }
+
+Author: Jeff Clayton
+/* Chrome 27-28 (and Opera 14-15) */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    _:scope, _:future, .selector {-chrome-:only(;
+        property:value;
+    );} 
+}
+
+Author: Jeff Clayton
+/* Safari 6.1+, Chrome 26+ (and Opera 14+) */
+
+_:future, .selector:not(*:root) { property:value; }
+
+Author: Jeff Clayton
+/* Safari 6.1+, Chrome 26+ (and Opera 14+) */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @media (min-width:0px) {
+    .selector { property:value; } 
+} }
+
+Author: Jeff Clayton
+/* Chrome 26-28 (and Opera 14-15) */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    _:future, .selector {-chrome-:only(;
+        property:value;
+    );} 
+}
+
+Author: Jeff Clayton
+/* Safari 6.1-7.0, Chrome 26-28 (and Opera 14-15) */
+
+@media screen { @media (min-width:0px) {
+    .selector {[; property:value; ];} 
+} }
+
+Author: Jeff Clayton
+/* Safari 6.1+, Chrome 24+ (and Opera 14+) */
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+  and (orientation) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 24 */
+
+@media screen and (orientation) {
+    ::webkit, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 22-25 */
+
+@media screen and(min--moz-device-pixel-ratio:0) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 22-25 */
+
+@media not all and(-webkit-min-device-pixel-ratio:0) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 22-24 */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    ::webkit, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 22-23 */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    _::-moz-svg-foreign-content, _:scope, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 6.1+, Chrome 22+ (and Opera 14+) */
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+and (min-resolution:.001dpcm),
+screen and(-webkit-min-device-pixel-ratio:0) {
+    .selector {
+        property:value;
+    }
+}
+
+Author: Jeff Clayton
+/* Safari 5.1-6.0, Chrome 10-24 */
+
+_::-moz-svg-foreign-content, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 6.0-, Chrome 23- */
+
+@media screen and (min-width:-100px)
+  and (-webkit-min-device-pixel-ratio:0) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 19+ (and Opera 14+) */
+
+_::-webkit-filter, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.1-6.0, Chrome 19-24 */
+
+_::-webkit-filter, _::-moz-math-stretchy, :root  .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 6.0, Chrome 19-23 */
+
+@media not print and (min--moz-device-pixel-ratio) {
+    _:scope, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 6.0, Chrome 19-23 */
+
+_::-moz-svg-foreign-content, _:scope, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.1-6.0, Chrome 10-23 */
+
+@media screen and (min-width:-100px)
+  and (-webkit-min-device-pixel-ratio:0) {
+    _::-moz-svg-foreign-content, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 10-28 (and Opera 14-15) */
+
+_:in-range, :root .selector {[; property:value; ];}
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 15+ (and Opera 14+),
+   Android Browser 4+ (Android OS 4.0+) -- NOT iOS! */
+
+_:-webkit-full-screen-ancestor, :root .selector { property:value; }
+
+Author: Jeff Clayton
+While similar to the -webkit-full-screen-ancestor pseudo-class above, it appears that Google may have jumped the gun and put this one out there a few versions early. Notice that it was live in Chrome 11, but tabled until brought back in Chrome 15…
+
+/* Safari 5.1+, Chrome 11,15+ (and Opera 14+),
+   Android Browser 4+ (Android OS 4.0+) -- NOT iOS! */
+
+_:-webkit-full-screen, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 13+ (and Opera 14+) */
+
+_:nth-last-child(n), _:-webkit-any(x), { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 12+ (and Opera 14+) */
+
+_:-webkit-any(x), { property:value; }
+
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 10+ (and Opera 14+) */
+
+_:in-range, _:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 7+ (and Opera 14+) */
+
+_::-webkit-input-speech-button, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.1+, Chrome 6+ (and Opera 14+) */
+
+_::-webkit-progress-bar-value, :root .selector { property:value; }
+Author: Jeff Clayton
+
+/* Safari 5.0+, Chrome 5+ (and Opera 14+) */
+
+_::-webkit-inner-spin-button, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.0, Chrome 5 */
+
+@media not all and (min-resolution:.001dpcm) {
+    _::-webkit-inner-spin-button, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Chrome 5 */
+
+@media screen and (min-width:0\-) {
+  _::-webkit-inner-spin-button, .selector { property:value; }
+}
+
+Author: Jeff Clayton
+/* Safari 5.0, Chrome 4-9 */
+
+html:not(:nth-child(-n1)):not(:nth-child(+0)) .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 5.0-, Chrome 5- */
+
+@media not all and (min-resolution:.001dpcm) {
+    .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 4.1+, Chrome 4+ (and Opera 14+) */
+
+_:default, _:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+This next one I tested for browserhacks was posted to us as a modification on the 0\0 media hack primarily for Internet Explorer.
+
+/* Safari 4.1-, Chrome 5- */
+
+@media screen and (min-width:0\-) {
+  .selector { property:value; }
+}
+
+Author: Andy Kirk
+/* Safari 4.1-5.0, Chrome 4-9 */
+
+_:default, body:nth-last-child(n0) .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 4.1-5.0, Chrome 4-5 */
+
+@media not all and (min-resolution:.001dpcm) {
+    _:default, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 4.0-5.0, Chrome 2-9 */
+
+_:window-inactive, body:nth-last-child(n0) .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 4(any), Chrome 2-5 */
+
+@media screen and (min-width:0\0) {
+   _:window-inactive, .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+/* Safari 4.0+, Chrome 2+ (and Opera 14+) */
+
+_:increment, _:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 3.1-5.0, Chrome 9- */
+
+body:nth-last-child(n0) .selector { property:value; }
+/* Safari 3.1+, Chrome 1+ (and Opera 14+) */
+
+_:only-of-type, _:not(*:root), .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 3.1(only), Chrome 1(only) */
+
+html:not(:last-child) .selector:not(:root:root) { property:value; }
+/* Safari 3.0+, Chrome 1+ (and Opera 14+) */
+
+_:-webkit-any-link, :root .selector { property:value; }
+
+Author: Jeff Clayton
+/* Safari 3.0+, Chrome 1+ (and Opera 14+) -- another one */
+
+_::-webkit-slider-thumb, :root .selector { property:value; }
+
+Author: Jeff Clayton
+My own take on a very old hack:
+
+/* Safari 3.x(any), Chrome 1(only) */
+
+_:not(:root:root), .selector { property:value; }
+
+Author: Jeff Clayton
+Early on, Safari 3.0 was more lax in case-sensitivity requirements regarding classes and id’s so one could target Safari 3.0 (not 3.1 and above) by using the Safari Bracket Class/ID hack:
+
+/* Safari 3.0(only) */
+
+/* By Class */
+
+.classname[class="CLASSNAME"] { property:value; }
+
+/* Or By Id */
+
+#idname[id="IDNAME"] { property:value; }
+This is also a very old one — only here for completeness, though I have not tested it.
+
+/* Safari 2.x(any) */
+
+html:first-child .selector { property:value; }
+
+Source: Paul Irish
+For further separation possibilities, using the above set Chrome 22-28, it would require ordered CSS. We could either post the 22-28 version above, or the 22-25 version, but smaller and more surgical feels better. So I started with this one, therefore 25 is targeted first and the rest get filtered out:
+
+/* Chrome 22-25 */
+
+@media screen and(min--moz-device-pixel-ratio:0) {
+    .selector {
+        property:value;
+    }
+}
+
+Author: Jeff Clayton
+Now for the overrides:
+
+/* Chrome 22-23 */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    _::-moz-svg-foreign-content, _:scope, .selector {
+        property:value;
+    }
+}
+
+Author: Jeff Clayton
+/* Chrome 24 */
+
+@media screen and (orientation) {
+     ::webkit, .selector {
+        property:value;
+    }
+}
+
+Author: Jeff Clayton
+For the next block, we have Chrome 26-28:
+
+/* Chrome 26-28 */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+    _:future, .selector {-chrome-:only(;
+
+        property:value;
+
+    );}
+}
+
+Author: Jeff Clayton
+The next block targets 27-28 but leaves 26 untouched:
+
+/* Chrome 27-28 */
+
+@media screen and(-webkit-min-device-pixel-ratio:0) {
+      _:scope, _:future, .selector {-chrome-:only(;
+
+        property:value;
+    );}
+}
+
+Author: Jeff Clayton
+Then we can target 28 by itself, leaving 27 untouched:
+
+/* Chrome 28 */
+
+@supports (overflow:-webkit-marquee) {
+     .selector {
+        property:value;
+    }
+}
+
+Author: Jeff Clayton
+What we have done is separated these versions of Chrome by using CSS overrides for the final output: Versions 22-23 (together), Version 24, Version 25, Version 26, Version 27, and Version 28.
+
+For older versions [when Chrome started releasing different versions more quickly than Safari] the fact that we have one version of Safari (5.1+) that handle several different hacks that deal with different versions of Chrome means we can separate out a few versions of Chrome from Safari if we do them in order. Note that iOS uses the Safari engine as I mentioned before so on that one the first one applies. The second one that normally affects Chrome 15+ does not affect iOS at all, so the first one is the only one that applies to that OS.
+
+/* Chrome 6+, Safari 5.1+ (also on iOS)  */
+
+_::-webkit-progress-bar-value, :root .selector { color:blue; }
+
+/* Chrome 15+, Safari 5.1+ (ignored by iOS) */
+
+_:-webkit-full-screen-ancestor, :root .selector { color:red; }
+
+Author: Jeff Clayton
+This means that Chrome 6-14 has been segregated from Safari and targeted as blue. This is only for historical reference, but it is possible and the idea can be used again in the future. On iOS the browser will show blue, and renders as Safari 5.1+.
+
+An adjacent set can get us Safari 5.0 by itself. There are still Macs out there using it [I see them pop up in my web logs], so it might still be handy to put these one after the other [reprinted from the above listings]:
+
+/* Safari 5.0, Chrome 5 */
+
+@media not all and (min-resolution:.001dpcm) {
+    _::-webkit-inner-spin-button, .selector { color:red; } 
+}
+
+Author: Jeff Clayton
+Since Chrome has been auto-updating since the mid 20’s, it really is not that necessary to separate them since Chrome 5 may never appear “in the wild” anymore… But I love to solve puzzles, so the next one does just that:
+
+/* Chrome 5 */
+
+@media screen and (min-width:0\-) {
+  _::-webkit-inner-spin-button, .selector { color:blue; }
+}
+
+Author: Jeff Clayton
+So now Chrome 5 and Safari 5 are separated completely at this point.
