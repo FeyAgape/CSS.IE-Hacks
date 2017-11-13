@@ -69,3 +69,74 @@ This Safari 6.1-7 one took time for me to create, and like the Chrome 29+ one, i
 Author: Jeff Clayton
 
 https://jeffclayton.wordpress.com/2014/07/22/the-chrome-and-safari-css-hacks-collection/ 
+
+Please note: if you are using Chrome on iOS (at least in versions 6.1-9) and you wonder why none of the hacks seem to be separating Chrome from Safari, it is because the iOS version of Chrome is using the Safari engine. It uses Safari hacks not the Chrome ones. More about that here: http://allthingsd.com/20120628/googles-chrome-for-ios-is-more-like-a-chrome-plated-apple/
+
+That out of the way here are hacks for you to use for more recent versions of Safari.
+
+Please be aware that these are hacks, and some of them are truly non-standard CSS code (which is why only some browsers are affected by them) and will not filter through SASS or other compilers or filters because they try to remove the non-standard data or convert to cross-browser form which completely destroys what we are trying to do here. To use them anyway, in many cases you must use your filter first, then apply the hack afterward. Such is the nature of a hack and does require the extra work of either including an external unfiltered CSS file or code block afterward. 
+
+For 9 specifically, I have been working on a page for that, so – rather than retype the same code, go here for hacks to affect Safari 9 (including a hack for iOS only now): My Safari 9 CSS Hacks
+
+Here is one for Safari 7.1 and newer:
+
+/* Safari 7.1+ */
+
+_::-webkit-full-page-media, _:future, :root .safari_only {
+
+  color:#0000FF; 
+  background-color:#CCCCCC; 
+
+}
+Author: Jeff Clayton
+Here is one I worked out for Safari 10.1+:
+(YES the double media query is a necessity!)
+
+/* Safari 10.1+ */
+
+@media not all and (min-resolution:.001dpcm) { @media
+{
+    .safari_only { 
+
+        color:#0000FF; 
+        background-color:#CCCCCC; 
+
+    }
+}}
+
+Author: Jeff Clayton
+This hack I worked out by combining multiple other hacks is for 6.1-10.0 (not 10.1):
+
+/* Safari 6.1-10.0 (10.1 is the latest version of Safari at this time) */
+
+@media screen and (min-color-index:0) 
+and(-webkit-min-device-pixel-ratio:0) { @media
+{
+    .safari_only { 
+
+        color:#0000FF; 
+        background-color:#CCCCCC; 
+
+    }
+}}
+
+Author: Jeff Clayton
+Below is a hack that separates 6.1-7.0 from the above 7.1+
+These also required a combination of multiple hacks in order to get the right result:
+
+/* Safari 6.1-7.0 */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+and (min-color-index:0)
+{  
+   .safari_only {(;
+
+      color:#0000FF; 
+      background-color:#CCCCCC; 
+
+    );}
+}
+
+Author: Jeff Clayton
+
+https://jeffclayton.wordpress.com/2015/04/28/css-hacks-for-safari-6-1-7-and-8-not-chrome/ 
