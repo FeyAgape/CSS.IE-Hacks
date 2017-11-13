@@ -1,0 +1,71 @@
+Safari 9.0 released, here are a few I created for that…
+
+For about a month I have been working on Safari 9 (beta) – Safari 9 on iOS (and the beta which is due to be released soon for desktops) and here is the resulting set of CSS hacks for you.
+
+/* Safari 9+ */
+
+@supports (overflow:-webkit-marquee)
+   and (justify-content:inherit) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+A One-Liner:
+
+/* Safari 9+ */
+
+_::-webkit-:not(:root:root), .selector { property:value; } 
+
+Author: Jeff Clayton
+And a One-Liner that is not for iOS:
+
+/* Safari 9+ (non-iOS) */
+
+_:-webkit-full-screen:not(:root:root), .selector { property:value; } 
+
+Author: Jeff Clayton
+One that targets Safari 9 but ONLY on iOS:
+
+/* Safari 9+ (iOS Only) */
+
+@supports (-webkit-text-size-adjust:none)
+   and (not (-ms-accelerator:true)) {
+     .selector { property:value; } 
+}
+
+Author: Jeff Clayton
+And more…
+
+/* Safari 10.1+ */
+
+@media not all and (min-resolution:.001dpcm)
+{ @media {
+    .selector { property:value; } 
+}}
+
+Author: Jeff Clayton
+/* Safari 6.1-10.0 */
+
+@media screen and (min-color-index:0)
+   and(-webkit-min-device-pixel-ratio:0) { @media {
+    .selector { property:value; }
+}}
+
+Author: Jeff Clayton
+/* Safari 6.2,7.1+ */
+
+_::-webkit-full-page-media, _:future, :root .selector { property:value; }
+
+Author: Jeff Clayton
+This Safari 6.1-7 one took time for me to create, and like the Chrome 29+ one, it was well worth time time and effort to invent:
+
+/* Safari 6.1-7.0 */
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+  and (min-color-index:0) {
+    .selector {(; property:value; );}
+}
+
+Author: Jeff Clayton
+
+https://jeffclayton.wordpress.com/2014/07/22/the-chrome-and-safari-css-hacks-collection/ 
