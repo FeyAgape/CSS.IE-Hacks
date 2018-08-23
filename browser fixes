@@ -1,0 +1,50 @@
+@media screen and (-webkit-min-device-pixel-ratio:0) {  
+  .fa-phone{
+  background-image: linear-gradient(to top, #282258, #1d8076), linear-gradient(#454545, #454545);
+  }
+  .fa-search{
+  background-image: linear-gradient(to top, #282258, #1d8076), linear-gradient(#454545, #454545);
+  }
+  .fa-envelope{
+    background-image: linear-gradient(to top, #282258, #1d8076), linear-gradient(#454545, #454545);
+  }
+  .home.page .fullscreen-header #page-header-bg .subheader{
+    background-image: linear-gradient(to top, #282258, #1d8076), linear-gradient(#454545, #454545);
+  }
+  .nectar-button span{
+  background-image: linear-gradient(to top, #282258, #1d8076), linear-gradient(#454545, #454545);
+  }
+  .nectar-button:hover span{
+  background-image: linear-gradient(to top, #e3f4f8, #ffffff), linear-gradient(#ffffff, #ffffff); 
+  }
+}
+
+
+@-moz-document url-prefix() { 
+  .fa-phone{
+  -webkit-text-fill-color: #1d8076;
+  }
+  .fa-search{
+  -webkit-text-fill-color: #1d8076;
+  }
+  .fa-envelope{
+   -webkit-text-fill-color: #1d8076;
+  }
+  .home.page .fullscreen-header #page-header-bg .subheader{
+   -webkit-text-fill-color: #1d8076;
+  }
+  .nectar-button span{
+  -webkit-text-fill-color: #1d8076;
+  }
+  .nectar-button:hover span{
+  -webkit-text-fill-color: #1d8076;
+  }
+}
+
+
+
+@supports (-ms-ime-align:auto) {
+  .home.page .fullscreen-header #page-header-bg .subheader{
+   -webkit-text-fill-color:#282258 !important;
+  }
+}
